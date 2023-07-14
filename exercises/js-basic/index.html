@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h1>Login</h1>
+                        <form>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="email">
+                                <div id="emailMessage" class="form-text text-danger"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="inputPassword5" class="form-label">Password</label>
+                                <input type="password" id="inputPassword5" class="form-control"
+                                    aria-labelledby="passwordHelpBlock">
+                                <div id="passwordMessage" class="form-text text-danger"></div>
+                            </div>
+                            <button class="btn btn-primary">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const element = document.querySelector('form');
+        function validateEmail(mail) {
+            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+                return true;
+            }
+            return false;
+        }
+        element.addEventListener('submit', event => {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('inputPassword5').value;
+            const emailMessage = document.getElementById('emailMessage');
+            const passwordMessage = document.getElementById('passwordMessage');
+            emailMessage.innerHTML = '';
+            if (email == '') {
+                emailMessage.innerHTML = 'Email is required';
+                return;
+            }
+            if (password == '') {
+                passwordMessage.innerHTML = 'Password is required';
+                return;
+            }
+            if (password.length < 6) {
+                passwordMessage.innerHTML = 'Password cannot be less than 6 characters';
+                return;
+            }
+            if (!validateEmail(email)) {
+                emailMessage.innerHTML = 'Email must be in email format';
+                return;
+            }
+            alert('Login success');
+        });
+    </script>
+</body>
+
+</html>
